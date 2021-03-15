@@ -8,12 +8,16 @@ import 'firebase/app';
 import { FirebaseAppProvider } from 'reactfire';
 import { firebaseConfig } from './firebaseconfig';
 
+import { Provider } from 'react-redux';
+import { store } from './store';
+
 /* Imports for Router */
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 render(
   <React.StrictMode>
     <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+      <Provider store={store}>
       <Router>
         <Switch>
           <Route exact path='/' component={Home}/>
@@ -23,6 +27,7 @@ render(
           <Route path='/results' component={Results}/>
         </Switch>
       </Router>
+      </Provider>
     </FirebaseAppProvider>
   </React.StrictMode>,
   document.getElementById('root')
