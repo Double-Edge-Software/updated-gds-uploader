@@ -1,12 +1,29 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { render } from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
+import { Home, VitalInfo, TaxInfo, FileUpload, Results } from './components';
+
+import 'firebase/app';
+import { FirebaseAppProvider } from 'reactfire';
+import { firebaseConfig } from './firebaseconfig';
+
+/* Imports for Router */
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+render(
   <React.StrictMode>
-    <App />
+    <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Home}/>
+          <Route path='/vitals' component={VitalInfo}/>
+          <Route path='/tax' component={TaxInfo}/>
+          <Route path='/upload' component={FileUpload}/>
+          <Route path='/results' component={Results}/>
+        </Switch>
+      </Router>
+    </FirebaseAppProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
